@@ -14,3 +14,9 @@
        '()]
       [(cons (car LL) (first-n ((cdr LL)) (- n 1)))])))
 (first-n (lazy-infinite-range 1) 10)
+
+(define nth
+  (lambda (LL n)
+    (if (= 1 n)
+        (car LL)
+        (nth (cdr LL) (- n 1)))))

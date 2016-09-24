@@ -66,12 +66,11 @@
 
 
 (define test-remainder-list
-  (lambda (L)
+  (lambda (x L)
     (if (null? (cdr L))
         '()
-        (if ((not-divisible? (car L)) (cadr L))
-            (cons (cadr L) (test-remainder-list (cdr L)))
-            (test-remainder-list (cdr L))))))
+        (if ((not-divisible? x) (cadr L))
+            (cons (cadr L) (test-remainder-list x (cdr L)))
+            (test-remainder-list x (cdr L))))))
 
-
-        
+(test-remainder-list 2 '(2 3 4 5 6 7 8 9 10 11 12 13 14))

@@ -1,3 +1,7 @@
+;;; Team Camembert / PEPS Squad
+;;; Michael Vue, Simon Orlovsky, Martin Green
+
+;; Construct a lazy list from a to b
 (define lazy-range
   (lambda (a b)
     (if (> a b)
@@ -5,13 +9,14 @@
         (cons a
               (lambda () (lazy-range (+ a 1) b))))))
 
+;; Construct a lazy list from a to infinity
 (define lazy-infinite-range
   (lambda (a)
     (if (not (number? a))
         '()
     (cons a (lambda () (lazy-infinite-range (+ a 1)))))))
 
-;;; Construct a regular list containing the first n values in the lazy list LL
+;; Construct a regular list containing the first n values in the lazy list LL
 (define first-n
   (lambda (LL n)
     (cond
@@ -23,14 +28,14 @@
 
 ; (first-n (lazy-infinite-range 1) 10)
 
-;;; Helper for nth function
+;; Helper for nth function
 (define nth-helper
   (lambda (LL n)
     (cond [(< (length LL) n) #f]
           [(= 1 n) (car LL)]
           [else (nth (cdr LL) (- n 1))])))
 
-;;; Compute the nth value in the lazy list LL
+;; Compute the nth value in the lazy list LL
 (define nth
   (lambda (LL n)
     (nth-helper LL n)))

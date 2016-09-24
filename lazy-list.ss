@@ -57,10 +57,12 @@
           #t))))
 
 (define remainder-list
-  (lambda (LL)
+  (lambda (LL x)
     (if (null? LL)
         '()
-        (if ((not-divisible? (car LL)) x))
+        (if ((not-divisible? (car LL)) x)
+            (cons x (lambda () (reminader-list ((cdr LL)) (+ x 1))))
+            (lambda () (remainder-list ((cdr LL)) (+ x 1)))))))
 
 
 

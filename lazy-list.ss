@@ -65,5 +65,13 @@
             (lambda () (remainder-list ((cdr LL)) (+ x 1)))))))
 
 
+(define test-remainder-list
+  (lambda (L)
+    (if (null? (cdr L))
+        '()
+        (if ((not-divisible? (car L)) (cadr L))
+            (cons (cadr L) (test-remainder-list (cdr L)))
+            (test-remainder-list (cdr L))))))
+
 
         

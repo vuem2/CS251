@@ -40,7 +40,7 @@
   (lambda (LL n)
     (nth-helper LL n)))
 
-
+;; Construct a new lazy list where the elements of LL are true given f
 (define filter-lazy-list
   (lambda (f LL)
     (if (null? LL)
@@ -49,6 +49,7 @@
             (cons (car LL) (lambda () (filter-lazy-list f ((cdr LL)))))
             (filter-lazy-list f ((cdr LL)))))))
 
+;; Returns true if x is not divisible by y
 (define not-divisible?
   (lambda (x)
     (lambda (y)

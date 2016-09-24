@@ -33,12 +33,12 @@
   (lambda (LL n)
     (cond [(< (length LL) n) #f]
           [(= 1 n) (car LL)]
-          [else (nth (cdr LL) (- n 1))])))
+          [else (nth-helper (cdr LL) (- n 1))])))
 
 ;; Compute the nth value in the lazy list LL
 (define nth
   (lambda (LL n)
-    (nth-helper LL n)))
+    (nth-helper (first-n LL n) n)))
 
 ;; Construct a new lazy list where the elements of LL are true given f
 (define filter-lazy-list

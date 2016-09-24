@@ -73,4 +73,11 @@
             (cons (cadr L) (test-remainder-list x (cdr L)))
             (test-remainder-list x (cdr L))))))
 
-(test-remainder-list 2 '(2 3 4 5 6 7 8 9 10 11 12 13 14))
+(define test-remainder-list-helper
+  (lambda (L)
+    (if (null? L)
+        '()
+        (cons (car L) (test-remainder-list-helper (test-remainder-list (car L) L))))))
+
+(test-remainder-list 2 '(2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21))
+(test-remainder-list-helper (first-n (lazy-infinite-range 2) 99))

@@ -26,8 +26,6 @@
        '()]
       [(cons (car LL) (first-n ((cdr LL)) (- n 1)))])))
 
-; (first-n (lazy-infinite-range 1) 10)
-
 ;; Helper for nth function
 (define nth-helper
   (lambda (LL n)
@@ -57,46 +55,21 @@
           #f
           #t))))
 
-(define remainder-list
-  (lambda (LL x)
-    (if (null? LL)
-        '()
-        (if ((not-divisible? (car LL)) x)
-            (cons x (lambda () (reminader-list ((cdr LL)) (+ x 1))))
-            (lambda () (remainder-list ((cdr LL)) (+ x 1)))))))
-
-
-(define test-remainder-list
-  (lambda (x L)
-    (if (null? (cdr L))
-        '()
-        (if ((not-divisible? x) (cadr L))
-            (cons (cadr L) (test-remainder-list x (cdr L)))
-            (test-remainder-list x (cdr L))))))
-
-(define test-remainder-list-helper
-  (lambda (L)
-    (if (null? L)
-        '()
-        (cons (car L) (test-remainder-list-helper (test-remainder-list (car L) L))))))
-
+;; Takes lazy list and returns new lazy list whose CDR is not divisible by x
 (define remainder-list
   (lambda (L x)
         (if ((not-divisible? x) (car ((cdr L))))
             (cons (car ((cdr L))) (lambda () (remainder-list ((cdr L)) x)))
             (remainder-list ((cdr L)) x))))
 
-
+;; Increments the x for remainder list
 (define sieve-helper
   (lambda (L)
     (if (null? L)
         '()
         (cons (car L) (lambda () (sieve-helper (remainder-list L (car L))))))))
 
+;; Returns lazy list representing all prime numbers starting from two
 (define sieve
   (lambda ()
     (sieve-helper (lazy-infinite-range 2))))
-
-;;;(test-remainder-list 2 '(2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21))
-;;;(test-remainder-list-helper (first-n (lazy-infinite-range 2) 20))
-;;;(nth (sieve) 20)

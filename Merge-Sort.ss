@@ -1,4 +1,8 @@
-;; Merge two lists of numbers which are already in increasing order
+;;; Michael Vue, Simon Orlovsky, Martin Green
+;;; Problem Set 05
+;;; Team Camambert / PEPS Squad
+
+;; Merge two lists that are already in the correct order
 (define merge
   (lambda (f l1 l2)
     (if (null? l1) l2
@@ -29,15 +33,3 @@
 (define sort
   (lambda (f L)
     (merge-sort f L)))
-
-
-
-
-(sort < '(3 4 5 2 3 8 9 70 34 23 12 3 45 34))
-
-(sort (lambda (x y) (< (string-length x) (string-length y)))
-      '("friends" "romans" "countrymen" "lend" "me" "your" "ears"))
-
-(sort string-ci<? '("friends" "romans" "countrymen" "lend" "me" "your" "ears"))
-
-(sort > '(3 5 9 1 125 2 34 1 16 1 14 61 61))

@@ -22,7 +22,7 @@
                         (cons (car l) (odd-indices (cdr (cdr l)))))))))
     (if (null? l) l
         (if (null? (cdr l)) l
-            (merge-lists f
+            (merge f
                          (merge-sort f (odd-indices l))
                          (merge-sort f (even-indices l))))))))
 
@@ -33,4 +33,11 @@
 
 
 
-(define c (sort < '(3 4 5 2 3 8 9 70 34 23 12 3 45 34)))
+(sort < '(3 4 5 2 3 8 9 70 34 23 12 3 45 34))
+
+(sort (lambda (x y) (< (string-length x) (string-length y)))
+      '("friends" "romans" "countrymen" "lend" "me" "your" "ears"))
+
+(sort string-ci<? '("friends" "romans" "countrymen" "lend" "me" "your" "ears"))
+
+(sort > '(3 5 9 1 125 2 34 1 16 1 14 61 61))
